@@ -204,7 +204,7 @@ export default class SearchBox extends React.Component {
 					{
 						this.state.searchValue != '' ?
 						(
-							this.state.searchField == 'record' ? 'Innehåll: ' :
+							this.state.searchField == 'record' ? 'Söksträng: ' :
 							this.state.searchField == 'person' ? 'Person: ' :
 							this.state.searchField == 'place' ? 'Ort: ' : ''
 						) : l('Sök')

@@ -10,6 +10,7 @@ import FeedbackOverlay from './../../ISOF-React-modules/components/views/Feedbac
 import TranscriptionOverlay from './../../ISOF-React-modules/components/views/TranscriptionOverlay';
 import PopupNotificationMessage from './../../ISOF-React-modules/components/controls/PopupNotificationMessage';
 import OverlayWindow from './../../ISOF-React-modules/components/controls/OverlayWindow';
+import GlobalAudioPlayer from './../../ISOF-React-modules/components/views/GlobalAudioPlayer';
 import SitevisionContent from './../../ISOF-React-modules/components/controls/SitevisionContent';
 
 import routeHelper from './../utils/routeHelper';
@@ -34,6 +35,9 @@ export default class Application extends React.Component {
 			includeNordic: false
 		};
 
+		// Lissna på event när ljudspelare syns, lägger till .has-docked-control till body class
+		window.eventBus.addEventListener('audio.playervisible', this.audioPlayerVisibleHandler.bind(this));
+
 		// Bind all event handlers to this (the actual component) to make component variables available inside the functions
 		this.mapMarkerClick = this.mapMarkerClick.bind(this);
 		this.popupCloseHandler = this.popupCloseHandler.bind(this);
@@ -54,6 +58,12 @@ export default class Application extends React.Component {
 			params: this.props.params,
 			popupVisible: false
 		};
+	}
+
+	audioPlayerVisibleHandler() {
+		// När GlobalAudioPlayer visas lägger vi till class till document.body för att
+		// få utrymme för ljudspelaren i gränssnittet
+		document.body.classList.add('has-docked-control');
 	}
 
 	mapMarkerClick(placeId) {
@@ -199,6 +209,8 @@ export default class Application extends React.Component {
 					<MapMenu />
 
 					<LocalLibraryView headerText={l('Mina sägner')} />
+
+					<GlobalAudioPlayer />
 
 				</MapView>
 

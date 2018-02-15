@@ -9,17 +9,30 @@ export default {
 
 	// Speciella inställningar för projektet, används nu mest för Matkarta-GUI, siteOptions som property av config måste dock finnas
 	siteOptions: {
-	/*
 		recordList: {
-			// Döljd materialtyp i RecordList, används för matkartan
+			// Döljd materialtyp i RecordList
 			hideMaterialType: true,
-
-			// Vilka kategorier vi vill visa i listan, här vill vi bara visa matkarta kategorier men dölja frågolista-kategorier
-			visibleCategories: ['matkarta']
+			hideCategories: true
 		},
-		// Inaktivera länker till personer, visa bara namnet
-		disablePersonLinks: true
-	*/
+
+		recordView: {
+			visible_metadata_fields: [
+				'folkmusik_instrument',
+				'folkmusik_recorded_by',
+				'folkmusik_musician_name',
+				'folkmusik_genre',
+				'folkmusik_proveniens'
+			],
+			full_audio_player: true
+		},
+
+		metadataLabels: {
+			folkmusik_instrument: 'Sång/instrument',
+			folkmusik_recorded_by: 'Inspelat eller inlämnat av',
+			folkmusik_musician_name: 'Sångare/instrumentalist',
+			folkmusik_genre: 'Låttyp eller visgenre',
+			folkmusik_proveniens: 'Proveniens'
+		}
 	},
 
 	// Vilket land
@@ -29,13 +42,13 @@ export default {
 	startPageUrl: 'http://www.sprakochfolkminnen.se/om-oss/kartor/sagenkartan/om-sagenkartan---kort.html',
 
 	imageUrl: 'http://www4.sprakochfolkminnen.se/Folkminnen/Svenska_sagor_filer/',
-	audioUrl: 'http://www4.sprakochfolkminnen.se/Folkminnen/Svenska_sagor_filer/inspelningar/',
+	audioUrl: 'http://www4.sprakochfolkminnen.se/Folkminnen/Svenska_sagor_filer/',
 
 	appUrl: 'http://www4.sprakochfolkminnen.se/sagner/',
 	siteUrl: 'http://www.sprakochfolkminnen.se/om-oss/kartor/sagenkartan.html',
 
 	// Url till Django/Elasticsearch API
-	apiUrl: 'http://frigg.sprakochfolkminnen.se/sagendatabas/api/es/',
+	apiUrl: 'http://frigg-test.sprakochfolkminnen.se/sagendatabas/api/es/',
 
 	// Url till Django Rest API
 	restApiUrl: 'http://frigg-test.sprakochfolkminnen.se/sagendatabas/api/'

@@ -1,10 +1,9 @@
 import React from 'react';
 
-import CategoryMenu from './CategoryMenu';
+import SearchMenu from './SearchMenu';
 import SearchBox from './SearchBox';
-import NordicSwitch from './NordicSwitch';
 
-export default class SearchMenu extends React.Component {
+export default class MapMenu extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -54,6 +53,8 @@ export default class SearchMenu extends React.Component {
 
 				<SearchBox ref="searchBox" 
 					onSizeChange={this.searchBoxSizeChangeHandler} />
+
+				<SearchMenu />
 
 			</div>
 		);
