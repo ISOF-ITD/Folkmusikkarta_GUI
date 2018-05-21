@@ -30,7 +30,6 @@ export default class SearchBox extends React.Component {
 		this.state = {
 			searchValue: '',
 			searchField: 'record',
-			includeNordic: false,
 			expanded: false,
 			advanced: false,
 			searchCategories: []
@@ -46,10 +45,15 @@ export default class SearchBox extends React.Component {
 	}
 
 	executeSimpleSearch() {
+		if (this.props.onSearch) {
+			this.props.onSearch(this.state.searchValue);
+		}
+
+		/*
 		// Lägg sökroute till url:et, kommer hanteras via router objected i app.js och skickas till MapView och RecordList
 		hashHistory.push('/places'
-			+(this.state.searchValue != '' ? '/search/'+this.state.searchValue+'/search_field/'+this.state.searchField : '')
-			+(this.state.includeNordic ? '/nordic/true' : ''));
+			+(this.state.searchValue != '' ? '/search/'+this.state.searchValue+'/search_field/'+this.state.searchField : ''));
+		*/
 	}
 
 	searchButtonClickHandler() {

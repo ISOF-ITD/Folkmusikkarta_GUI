@@ -12,6 +12,7 @@ export default class SearchMenu extends React.Component {
 
 		this.menuButtonClick = this.menuButtonClick.bind(this);
 		this.toggleMinimize = this.toggleMinimize.bind(this);
+		this.termClickHandler = this.termClickHandler.bind(this);
 
 		this.state = {
 			menuOpen: false,
@@ -32,6 +33,7 @@ export default class SearchMenu extends React.Component {
 			],
 			genre: [
 				'Låt',
+				'Visa',
 				'Schottis',
 				'Vals',
 				'Brudvals',
@@ -55,6 +57,12 @@ export default class SearchMenu extends React.Component {
 		});
 	}
 
+	termClickHandler(event) {
+		if (this.props.onSearch) {
+			this.props.onSearch(event.currentTarget.dataset.term);
+		}
+	}
+
 	render() {
 		return (
 			<div ref="container" className={'heading-list-wrapper'+(this.state.minimized ? ' minimized' : '')}>
@@ -73,8 +81,8 @@ export default class SearchMenu extends React.Component {
 					<div className="grid-list">
 						{
 							_.map(this.searchTerms.genre, function(term) {
-								return <a className="item" key={term} href={'#/places/search/'+term}>{term}</a>;
-							})
+								return <a onClick={this.termClickHandler} data-term={term} className="item" key={term}>{term}</a>;
+							}.bind(this))
 						}
 						<div className="u-cf" />
 					</div>
@@ -83,8 +91,8 @@ export default class SearchMenu extends React.Component {
 					<div className="grid-list">
 						{
 							_.map(this.searchTerms.instruments, function(term) {
-								return <a className="item" key={term} href={'#/places/search/'+term}>{term}</a>;
-							})
+								return <a onClick={this.termClickHandler} data-term={term} className="item" key={term}>{term}</a>;
+							}.bind(this))
 						}
 						<div className="u-cf" />
 					</div>

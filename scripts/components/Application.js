@@ -54,6 +54,7 @@ export default class Application extends React.Component {
 
 			searchValue: '',
 			searchField: '',
+			searchMetadata: false,
 
 			params: this.props.params,
 			popupVisible: false
@@ -133,7 +134,7 @@ export default class Application extends React.Component {
 				searchYearTo: this.props.params.year_to,
 				searchPersonRelation: this.props.params.person_relation,
 				searchGender: this.props.params.gender,
-				includeNordic: this.props.params.nordic
+				searchMetadata: this.props.params.has_metadata
 			});
 
 			window.eventBus.addEventListener('Lang.setCurrentLang', this.languageChangedHandler);
@@ -154,6 +155,7 @@ export default class Application extends React.Component {
 			searchYearTo: this.props.params.year_to,
 			searchPersonRelation: this.props.params.person_relation,
 			searchGender: this.props.params.gender,
+			searchMetadata: this.props.params.has_metadata,
 			params: this.props.params
 		}, function() {
 			setTimeout(function() {
@@ -176,7 +178,7 @@ export default class Application extends React.Component {
 				searchYearTo: props.params.year_to,
 				searchPersonRelation: props.params.person_relation,
 				searchGender: props.params.gender,
-				includeNordic: props.params.nordic
+				searchMetadata: props.params.has_metadata
 			});
 		}
 
@@ -188,6 +190,7 @@ export default class Application extends React.Component {
 			searchYearTo: props.params.year_to,
 			searchPersonRelation: props.params.person_relation,
 			searchGender: props.params.gender,
+			searchMetadata: props.params.has_metadata,
 			params: props.params
 		});
 	}
@@ -206,7 +209,7 @@ export default class Application extends React.Component {
 
 				<MapView searchParams={this.state.params} onMarkerClick={this.mapMarkerClick}>
 
-					<MapMenu />
+					<MapMenu searchMetadata={this.state.searchMetadata} />
 
 					<LocalLibraryView headerText={l('Mina sägner')} />
 

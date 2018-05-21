@@ -1,4 +1,5 @@
 import React from 'react';
+import { Router, hashHistory } from 'react-router';
 
 import SearchMenu from './SearchMenu';
 import SearchBox from './SearchBox';
@@ -8,35 +9,33 @@ export default class MapMenu extends React.Component {
 		super(props);
 
 		this.searchBoxSizeChangeHandler = this.searchBoxSizeChangeHandler.bind(this);
+		this.searchHandler = this.searchHandler.bind(this);
+		this.pointTypeOptionClickHandler = this.pointTypeOptionClickHandler.bind(this);
 
 		this.state = {
 			selectedCategory: null,
 			expanded: false,
-			advanced: false
+			advanced: false,
+			pointTypeOption: 1
 		};
+
+		// Lyssna efter event från eventBus som kommer om url:et ändras med nya sökparams
+		if (window.eventBus) {
+			window.eventBus.addEventListener('application.searchParams', this.receivedSearchParams.bind(this))
+		}
 	}
 
-	componentDidMount() {
-		this.setState({
-			selectedCategory: this.props.selectedCategory,
-			searchValue: this.props.searchValue,
-			searchField: this.props.searchField,
-			searchYearFrom: this.props.searchYearFrom,
-			searchYearTo: this.props.searchYearTo,
-			searchPersonRelation: this.props.searchPersonRelation,
-			searchGender: this.props.searchGender
-		});
-	}
 
-	componentWillReceiveProps(props) {
+	receivedSearchParams(event) {
+		// Fick parametrar från eventBus, uppdaterar sökfält
 		this.setState({
-			selectedCategory: props.selectedCategory,
-			searchValue: props.searchValue,
-			searchField: props.searchField,
-			searchYearFrom: props.searchYearFrom,
-			searchYearTo: props.searchYearTo,
-			searchPersonRelation: props.searchPersonRelation,
-			searchGender: props.searchGender
+			searchValue: event.target.searchValue || '',
+			searchField: event.target.searchField || 'record',
+			searchYearFrom: event.target.searchYearFrom,
+			searchYearTo: event.target.searchYearTo,
+			searchPersonRelation: event.target.searchPersonRelation || '',
+			searchGender: event.target.searchGender || '',
+			pointTypeOption: event.target.searchMetadata == 'folkmusik_published' ? 2 : 1
 		});
 	}
 
@@ -47,14 +46,51 @@ export default class MapMenu extends React.Component {
 		});
 	}
 
+	pointTypeOptionClickHandler(event) {
+		this.setState({
+			pointTypeOption: event.currentTarget.dataset.option
+		}, function() {
+			this.updateRoute();
+		}.bind(this));
+	}
+
+	searchHandler(searchTerm) {
+		console.log('searchHandler')
+		this.setState({
+			searchValue: searchTerm
+		}, function() {
+			this.updateRoute();
+		}.bind(this));
+	}
+
+	updateRoute() {
+		hashHistory.push('/places'+(this.state.searchValue && this.state.searchValue != '' ? '/search/'+this.state.searchValue : '')+(this.state.pointTypeOption == 2 ? '/has_metadata/folkmusik_published' : ''));
+	}
+
 	render() {
 		return (
 			<div className={'menu-wrapper'+(this.state.expanded ? ' menu-expanded' : '')+(this.state.advanced ? ' advanced-menu-view' : '')}>
 
-				<SearchBox ref="searchBox" 
-					onSizeChange={this.searchBoxSizeChangeHandler} />
+				<div className={'point-type-options map-floating-control option-'+this.state.pointTypeOption}>
 
-				<SearchMenu />
+					<a className="option-item" data-option="1" onClick={this.pointTypeOptionClickHandler}>
+						<span className="icon icon-marker-normal"></span>
+						<span className="label">Alla punkter</span>
+					</a>
+
+					<a className="option-item" data-option="2" onClick={this.pointTypeOptionClickHandler}>
+						<span className="icon icon-marker-curated"></span>
+						<span className="label">Ljudfiler</span>
+					</a>
+
+					<span className="selected-line"></span>
+
+				</div>
+
+				<SearchBox ref="searchBox" 
+					onSizeChange={this.searchBoxSizeChangeHandler} onSearch={this.searchHandler} />
+
+				<SearchMenu onSearch={this.searchHandler} />
 
 			</div>
 		);

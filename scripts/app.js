@@ -63,16 +63,16 @@ ReactDOM.render(
 		<Redirect from="/" to="/places"/>
 		<Route path="/" component={Application}>
 
-			<Route path="/places(/record_ids/:record_ids)(/search/:search)(/search_field/:search_field)(/type/:type)(/category/:category)(/year_from/:year_from)(/year_to/:year_to)(/person_relation/:person_relation)(/gender/:gender)(/person_landskap/:person_landskap)(/person_county/:person_county)(/person_harad/:person_harad)(/person_socken/:person_socken)(/nordic/:nordic)(/page/:page)" 
-				manuallyOpenPopup="true" openButtonLabel="Visa sökträffar som lista" components={{popup: RecordListWrapper}}/>
+			<Route path="/places(/record_ids/:record_ids)(/search/:search)(/search_field/:search_field)(/year_from/:year_from)(/year_to/:year_to)(/has_metadata/:has_metadata)(/page/:page)" 
+				manuallyOpenPopup="true" openButtonLabel="Visa sökträffar som lista" components={{popup: RecordListWrapper}} highlightRecordsWithMetadataField="folkmusik_published" />
 
-			<Route path="/place/:place_id(/record_ids/:record_ids)(/search/:search)(/search_field/:search_field)(/type/:type)(/category/:category)(/year_from/:year_from)(/year_to/:year_to)(/person_relation/:person_relation)(/gender/:gender)(/person_landskap/:person_landskap)(/person_county/:person_county)(/person_harad/:person_harad)(/person_socken/:person_socken)(/nordic/:nordic)" 
-				components={{popup: PlaceView}}/>
+			<Route path="/place/:place_id(/record_ids/:record_ids)(/search/:search)(/search_field/:search_field)(/year_from/:year_from)(/year_to/:year_to)(/has_metadata/:has_metadata)" 
+				components={{popup: PlaceView}} highlightRecordsWithMetadataField="folkmusik_published" />
 
 			<Route path="/person/:person_id" 
 				components={{popup: PersonView}}/>
 
-			<Route path="/record/:record_id(/record_ids/:record_ids)(/search/:search)(/search_field/:search_field)(/type/:type)(/category/:category)(/year_from/:year_from)(/year_to/:year_to)(/person_relation/:person_relation)(/gender/:gender)(/person_landskap/:person_landskap)(/person_county/:person_county)(/person_harad/:person_harad)(/person_socken/:person_socken)(/nordic/:nordic)" 
+			<Route path="/record/:record_id(/record_ids/:record_ids)(/search/:search)(/search_field/:search_field)(/year_from/:year_from)(/year_to/:year_to)(/has_metadata/:has_metadata)" 
 				components={{popup: RecordView}}/>
 
 		</Route>

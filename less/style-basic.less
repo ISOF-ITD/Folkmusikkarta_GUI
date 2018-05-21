@@ -3,11 +3,14 @@
 @import "../ISOF-React-modules/less/leaflet.less";
 @import "../ISOF-React-modules/less/MarkerCluster.Default.less";
 
+@import "../ISOF-React-modules/less/nouislider.min.less";
+
 @import "../ISOF-React-modules/less/ui-components/map.less";
 @import "../ISOF-React-modules/less/ui-components/map-ui.less";
 @import "../ISOF-React-modules/less/ui-components/popupwindow.less";
 
 @import "../ISOF-React-modules/less/ui-components/mapmenu.less";
+@import "../ISOF-React-modules/less/ui-components/map-menu-list.less";
 @import "../ISOF-React-modules/less/ui-components/dropdownmenu.less";
 @import "../ISOF-React-modules/less/ui-components/local-library.less";
 @import "../ISOF-React-modules/less/ui-components/overlay.less";
@@ -16,6 +19,8 @@
 @import "../ISOF-React-modules/less/ui-components/popup-notification-message.less";
 @import "../ISOF-React-modules/less/ui-components/share-buttons.less";
 @import "../ISOF-React-modules/less/ui-components/image-map.less";
+@import "../ISOF-React-modules/less/ui-components/records-list.less";
+@import "../ISOF-React-modules/less/ui-components/slider.less";
 
 @import "../ISOF-React-modules/less/minimal-scrollbar.less";
 @import "../ISOF-React-modules/less/tables.less";
@@ -156,6 +161,122 @@ h2 {
 
 		@media print {
 			display: none;
+		}
+	}
+}
+
+.popup-wrapper {
+	.popup-content-wrapper {
+		.page-content {
+			@media (min-width: 950px) {
+				top: 10px;
+				left: 10px;
+				right: 410px;
+
+				margin: 0 0 10px 0;
+			}
+		}
+	}
+}
+
+.menu-wrapper {
+	@media (min-width: 950px) {
+		top: 101px;
+		right: 35px;
+
+		z-index: 1700;
+	}
+
+	@media (min-width: 1650px) {
+		right: 50px;
+	}
+
+	.point-type-options {
+		top: 0;
+	}
+
+	.search-box {
+		top: 83px;
+	}
+
+	.heading-list-wrapper {
+		top: 168px;
+	}
+}
+
+.point-type-options {
+	position: absolute;
+
+	width: 350px;
+	height: 72px;
+
+	padding: 0;
+
+	z-index: 1450;
+
+	.option-item {
+		display: inline-block;
+
+		width: 50%;
+		height: 72px;
+
+		font-size: 1.2rem;
+		text-align: center;
+		line-height: 72px;
+
+		box-sizing: border-box;
+
+		cursor: pointer;
+
+		&:first-child {
+			border-right: 1px solid #e8e8e8;
+		}
+
+		.icon {
+			display: inline-block;
+
+			width: 19px;
+			height: 24px;
+
+			margin-right: 10px;
+
+			background-position: center;
+			background-repeat: no-repeat;
+
+			vertical-align: middle;
+
+			&.icon-marker-normal {
+				background-image: url('../img/icon-marker-normal.png');
+			}
+
+			&.icon-marker-curated {
+				background-image: url('../img/icon-marker-curated.png');
+			}
+		}
+
+		.label {
+			display: inline-block;
+		}
+	}
+
+	.selected-line {
+		display: block;
+		
+		position: absolute;
+		
+		left: 25%;
+		bottom: 14px;
+		
+		height: 2px;
+		width: 35%;
+		
+		background: @color-red;
+		
+		.transform(translateX(-50%));
+		.transition(all 300ms ease-in-out);
+
+		.option-2& {
+			left: 75%;
 		}
 	}
 }
