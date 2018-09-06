@@ -180,6 +180,8 @@ h2 {
 }
 
 .menu-wrapper {
+	.transition(all 300ms ease-in-out);
+
 	@media (min-width: 950px) {
 		top: 101px;
 		right: 35px;
@@ -189,6 +191,19 @@ h2 {
 
 	@media (min-width: 1650px) {
 		right: 50px;
+
+		.has-overlay & {
+			left: 1230px;
+			top: 10px;
+		}
+	}
+
+	@media (max-width: 750px) {
+		top: 0;
+		left: 0;
+		right: 0;
+
+		width: auto;
 	}
 
 	.point-type-options {
