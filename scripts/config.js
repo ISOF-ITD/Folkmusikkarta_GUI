@@ -57,8 +57,8 @@ export default {
 	siteUrl: 'https://www.sprakochfolkminnen.se/om-oss/kartor/sagenkartan.html',
 
 	// Url till Django/Elasticsearch API
-	apiUrl: 'https://frigg-test.sprakochfolkminnen.se/sagendatabas/api/es/',
+	apiUrl: 'https://frigg.sprakochfolkminnen.se/sagendatabas/api/es/',
 
 	// Url till Django Rest API
-	restApiUrl: 'https://frigg-test.sprakochfolkminnen.se/sagendatabas/api/'
+	restApiUrl: 'https://frigg.sprakochfolkminnen.se/sagendatabas/api/'
 };
