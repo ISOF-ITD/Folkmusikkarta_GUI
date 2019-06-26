@@ -41,7 +41,10 @@ export default {
 			folkmusik_genre: 'Låttyp eller visgenre',
 			folkmusik_proveniens: 'Proveniens',
 			folkmusik_comment: 'Övrigt'
-		}
+		},
+		feedbackEmail: 'bengt.edqvist@sprakochfolkminnen.se',
+		// feedbackEmail: 'per.laas@sprakochfolkminnen.se',
+		feedbackText: 'Har du hittat några fel i Folkmusikdatabasen? Har du kompletterande information om musik eller text? Eller vill du hjälpa till på annat sätt? Kontakta oss gärna!',
 	},
 
 	// Vilket land
@@ -53,8 +56,8 @@ export default {
 	imageUrl: 'https://filemaker.sprakochfolkminnen.se/',
 	audioUrl: 'https://filemaker.sprakochfolkminnen.se/',
 
-	appUrl: 'https://www4.sprakochfolkminnen.se/folkmusik/',
-	siteUrl: 'https://www.sprakochfolkminnen.se/om-oss/kartor/sagenkartan.html',
+	appUrl: 'https://frigg.sprakochfolkminnen.se/static/js-apps/folkmusikkartan',
+	siteUrl: 'https://www.sprakochfolkminnen.se/folkminnen/projekt/hitta-folkmusiken/databasen-hitta-folkmusiken.html',
 
 	// Url till Django/Elasticsearch API
 	apiUrl: 'https://frigg.sprakochfolkminnen.se/sagendatabas/api/es/',
