@@ -56,7 +56,7 @@ export default {
 	imageUrl: 'https://filemaker.sprakochfolkminnen.se/',
 	audioUrl: 'https://filemaker.sprakochfolkminnen.se/',
 
-	appUrl: 'https://frigg.sprakochfolkminnen.se/static/js-apps/folkmusikkartan',
+	appUrl: 'https://frigg.sprakochfolkminnen.se/static/js-apps/folkmusikkartan/',
 	siteUrl: 'https://www.sprakochfolkminnen.se/folkminnen/projekt/hitta-folkmusiken/databasen-hitta-folkmusiken.html',
 
 	// Url till Django/Elasticsearch API
