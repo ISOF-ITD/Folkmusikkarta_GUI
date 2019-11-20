@@ -42,8 +42,8 @@ export default {
 			folkmusik_proveniens: 'Proveniens',
 			folkmusik_comment: 'Övrigt'
 		},
-		feedbackEmail: 'bengt.edqvist@sprakochfolkminnen.se',
-		// feedbackEmail: 'per.laas@sprakochfolkminnen.se',
+		feedbackEmail: 'bengt.edqvist@isof.se',
+		// feedbackEmail: 'per.laas@isof.se',
 		feedbackText: 'Har du hittat några fel i Folkmusikdatabasen? Har du kompletterande information om musik eller text? Eller vill du hjälpa till på annat sätt? Kontakta oss gärna!',
 	},
 
@@ -51,17 +51,17 @@ export default {
 	country: 'sweden',
 
 	// Webbsida som ska visas i OverlayWindow när användaren först kommer till kartan
-	startPageUrl: 'https://www.sprakochfolkminnen.se/om-oss/kartor/sagenkartan/om-sagenkartan---kort.html',
+	startPageUrl: 'https://www.isof.se/om-oss/kartor/sagenkartan/om-sagenkartan---kort.html',
 
-	imageUrl: 'https://filemaker.sprakochfolkminnen.se/',
-	audioUrl: 'https://filemaker.sprakochfolkminnen.se/',
+	imageUrl: 'https://filemaker.isof.se/',
+	audioUrl: 'https://filemaker.isof.se/',
 
-	appUrl: 'https://frigg.sprakochfolkminnen.se/static/js-apps/folkmusikkartan/',
-	siteUrl: 'https://www.sprakochfolkminnen.se/folkminnen/projekt/hitta-folkmusiken/databasen-hitta-folkmusiken.html',
+	appUrl: 'https://frigg.isof.se/static/js-apps/folkmusikkartan/',
+	siteUrl: 'https://www.isof.se/folkminnen/projekt/hitta-folkmusiken/databasen-hitta-folkmusiken.html',
 
 	// Url till Django/Elasticsearch API
-	apiUrl: 'https://frigg.sprakochfolkminnen.se/sagendatabas/api/es/',
+	apiUrl: 'https://frigg.isof.se/sagendatabas/api/es/',
 
 	// Url till Django Rest API
-	restApiUrl: 'https://frigg.sprakochfolkminnen.se/sagendatabas/api/'
+	restApiUrl: 'https://frigg.isof.se/sagendatabas/api/'
 };
