@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, hashHistory } from 'react-router';
+import { Router } from 'react-router-dom';
 
 import SearchMenu from './SearchMenu';
 import SearchBox from './SearchBox';
@@ -64,7 +64,7 @@ export default class MapMenu extends React.Component {
 	}
 
 	updateRoute() {
-		hashHistory.push('/places'+(this.state.searchValue && this.state.searchValue != '' ? '/search/'+this.state.searchValue : '')+(this.state.pointTypeOption == 2 ? '/has_metadata/folkmusik_published' : ''));
+		this.props.history.push('/places'+(this.state.searchValue && this.state.searchValue != '' ? '/search/'+this.state.searchValue : '')+(this.state.pointTypeOption == 2 ? '/has_metadata/folkmusik_published' : ''));
 	}
 
 	render() {

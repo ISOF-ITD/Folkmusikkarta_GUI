@@ -1,10 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import _ from 'underscore';
-import { hashHistory } from 'react-router';
-
-import CategoryList from './CategoryList';
-import categories from './../../ISOF-React-modules/utils/sagenkartaCategories.js';
 
 export default class SearchMenu extends React.Component {
 	constructor(props) {

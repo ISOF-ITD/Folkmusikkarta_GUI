@@ -1,10 +1,9 @@
 import RouteParser from 'route-parser';
-import { hashHistory } from 'react-router';
 
 const searchRoute = '(/record_ids/:record_ids)(/search/:search)(/search_field/:search_field)(/year_from/:year_from)(/year_to/:year_to)(/has_metadata/:has_metadata)';
 const placesRoute = '/places(/record_ids/:record_ids)(/search/:search)(/search_field/:search_field)(/year_from/:year_from)(/year_to/:year_to)(/has_metadata/:has_metadata)';
-const placeRoute = '/place/:place_id(/record_ids/:record_ids)(/search/:search)(/search_field/:search_field)(/year_from/:year_from)(/year_to/:year_to)(/has_metadata/:has_metadata)';
-const recordRoute = '/record/:record_id(/record_ids/:record_ids)(/search/:search)(/search_field/:search_field)(/year_from/:year_from)(/year_to/:year_to)(/has_metadata/:has_metadata)';
+const placeRoute = '/places/:place_id(/record_ids/:record_ids)(/search/:search)(/search_field/:search_field)(/year_from/:year_from)(/year_to/:year_to)(/has_metadata/:has_metadata)';
+const recordRoute = '/records/:record_id(/record_ids/:record_ids)(/search/:search)(/search_field/:search_field)(/year_from/:year_from)(/year_to/:year_to)(/has_metadata/:has_metadata)';
 
 export default {
 	createPlacePathFromPlaces(placeId, placesPath) {

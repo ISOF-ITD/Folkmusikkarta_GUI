@@ -1,13 +1,16 @@
 import React from 'react';
-import { hashHistory } from 'react-router';
+import { Route, Switch } from 'react-router-dom';
 
 import MapMenu from './MapMenu';
 import MapView from './../../ISOF-React-modules/components/views/MapView';
 import RoutePopupWindow from './../../ISOF-React-modules/components/controls/RoutePopupWindow';
 import LocalLibraryView from './../../ISOF-React-modules/components/views/LocalLibraryView';
+import PlaceView from './../../ISOF-React-modules/components/views/PlaceView';
+import RecordView from './../../ISOF-React-modules/components/views/RecordView';
 import ImageOverlay from './../../ISOF-React-modules/components/views/ImageOverlay';
 import FeedbackOverlay from './../../ISOF-React-modules/components/views/FeedbackOverlay';
 import TranscriptionOverlay from './../../ISOF-React-modules/components/views/TranscriptionOverlay';
+import ContributeInfoOverlay from './../../ISOF-React-modules/components/views/ContributeInfoOverlay';
 import PopupNotificationMessage from './../../ISOF-React-modules/components/controls/PopupNotificationMessage';
 import OverlayWindow from './../../ISOF-React-modules/components/controls/OverlayWindow';
 import GlobalAudioPlayer from './../../ISOF-React-modules/components/views/GlobalAudioPlayer';
@@ -56,7 +59,6 @@ export default class Application extends React.Component {
 			searchField: '',
 			searchMetadata: false,
 
-			params: this.props.params,
 			popupVisible: false
 		};
 	}
@@ -68,21 +70,21 @@ export default class Application extends React.Component {
 	}
 
 	mapMarkerClick(placeId) {
-		// När användaren klickar på en prick, lägger till #place/[id] till url:et,
+		// När användaren klickar på en prick, lägger till #places/[id] till url:et,
 		// detta kommer att hanteras av application router
-		hashHistory.push(routeHelper.createPlacePathFromPlaces(placeId, this.props.location.pathname));
+		this.props.history.push(routeHelper.createPlacePathFromPlaces(placeId, this.props.location.pathname));
 	}
 
 	popupCloseHandler() {
 		// Lägg till rätt route när användaren stänger popuprutan
-		if (hashHistory.getCurrentLocation().pathname.indexOf('record/') > -1) {
-			hashHistory.push(routeHelper.createPlacesPathFromRecord(hashHistory.getCurrentLocation().pathname));
+		if (this.props.location.pathname.indexOf('records/') > -1) {
+			this.props.history.push(routeHelper.createPlacesPathFromRecord(this.props.location.pathname));
 		}
-		else if (hashHistory.getCurrentLocation().pathname.indexOf('place/') > -1) {
-			hashHistory.push(routeHelper.createPlacesPathFromPlace(hashHistory.getCurrentLocation().pathname));
+		else if (this.props.location.pathname.indexOf('places/') > -1) {
+			this.props.history.push(routeHelper.createPlacesPathFromPlace(this.props.location.pathname));
 		}
 		else {
-			hashHistory.push('places');
+			this.props.history.push('places');
 		}
 	}
 
@@ -121,20 +123,20 @@ export default class Application extends React.Component {
 	}
 
 	componentDidMount() {
-		if (this.props.params.nordic) {
+		if (this.props.match.params.nordic) {
 			window.eventBus.dispatch('nordicLegendsUpdate', null, {includeNordic: true});			
 		}
 		// Skickar alla sök-parametrar via global eventBus
 		if (window.eventBus) {
 			window.eventBus.dispatch('application.searchParams', {
-				selectedCategory: this.props.params.category,
-				searchValue: this.props.params.search,
-				searchField: this.props.params.search_field,
-				searchYearFrom: this.props.params.year_from,
-				searchYearTo: this.props.params.year_to,
-				searchPersonRelation: this.props.params.person_relation,
-				searchGender: this.props.params.gender,
-				searchMetadata: this.props.params.has_metadata
+				selectedCategory: this.props.match.params.category,
+				searchValue: this.props.match.params.search,
+				searchField: this.props.match.params.search_field,
+				searchYearFrom: this.props.match.params.year_from,
+				searchYearTo: this.props.match.params.year_to,
+				searchPersonRelation: this.props.match.params.person_relation,
+				searchGender: this.props.match.params.gender,
+				searchMetadata: this.props.match.params.has_metadata
 			});
 
 			window.eventBus.addEventListener('Lang.setCurrentLang', this.languageChangedHandler);
@@ -148,15 +150,14 @@ export default class Application extends React.Component {
 		}
 
 		this.setState({
-			selectedCategory: this.props.params.category,
-			searchValue: this.props.params.search,
-			searchField: this.props.params.search_field,
-			searchYearFrom: this.props.params.year_from,
-			searchYearTo: this.props.params.year_to,
-			searchPersonRelation: this.props.params.person_relation,
-			searchGender: this.props.params.gender,
-			searchMetadata: this.props.params.has_metadata,
-			params: this.props.params
+			selectedCategory: this.props.match.params.category,
+			searchValue: this.props.match.params.search,
+			searchField: this.props.match.params.search_field,
+			searchYearFrom: this.props.match.params.year_from,
+			searchYearTo: this.props.match.params.year_to,
+			searchPersonRelation: this.props.match.params.person_relation,
+			searchGender: this.props.match.params.gender,
+			searchMetadata: this.props.match.params.has_metadata,
 		}, function() {
 			setTimeout(function() {
 				// Väntar en sekund, lägger till app-initialized till body class,
@@ -171,27 +172,26 @@ export default class Application extends React.Component {
 		// MapView, RecordsList och sökfält tar emot dem och hämtar data
 		if (window.eventBus) {
 			eventBus.dispatch('application.searchParams', {
-				selectedCategory: props.params.category,
-				searchValue: props.params.search,
-				searchField: props.params.search_field,
-				searchYearFrom: props.params.year_from,
-				searchYearTo: props.params.year_to,
-				searchPersonRelation: props.params.person_relation,
-				searchGender: props.params.gender,
-				searchMetadata: props.params.has_metadata
+				selectedCategory: props.match.params.category,
+				searchValue: props.match.params.search,
+				searchField: props.match.params.search_field,
+				searchYearFrom: props.match.params.year_from,
+				searchYearTo: props.match.params.year_to,
+				searchPersonRelation: props.match.params.person_relation,
+				searchGender: props.match.params.gender,
+				searchMetadata: props.match.params.has_metadata
 			});
 		}
 
 		this.setState({
-			selectedCategory: props.params.category,
-			searchValue: props.params.search,
-			searchField: props.params.search_field,
-			searchYearFrom: props.params.year_from,
-			searchYearTo: props.params.year_to,
-			searchPersonRelation: props.params.person_relation,
-			searchGender: props.params.gender,
-			searchMetadata: props.params.has_metadata,
-			params: props.params
+			selectedCategory: props.match.params.category,
+			searchValue: props.match.params.search,
+			searchField: props.match.params.search_field,
+			searchYearFrom: props.match.params.year_from,
+			searchYearTo: props.match.params.year_to,
+			searchPersonRelation: props.match.params.person_relation,
+			searchGender: props.match.params.gender,
+			searchMetadata: props.match.params.has_metadata,
 		});
 	}
 
@@ -202,43 +202,80 @@ export default class Application extends React.Component {
 
 	render() {
 		// Innehåll av RoutePopupWindow, kommer från application route i app.js
-		var popup = this.props.popup;
+		const _props = this.props;
+		const match = this.props.match;
 
 		return (
 			<div className={'app-container'+(this.state.popupVisible ? ' has-overlay' : '')}>
+				<Switch>
+					<Route
+						path="/places/:place_id([0-9]+)"
+						render={(_props) =>
+							<RoutePopupWindow
+								onShow={this.popupWindowShowHandler}
+								onHide={this.popupWindowHideHandler}
+								onClose={this.popupCloseHandler}
+								router={this.context.router}>
+									<PlaceView {..._props} match={match}/>
+								</RoutePopupWindow>
+					}/>
+					<Route 
+							path="/places"
+							render={() =>
+								<RoutePopupWindow
+									onShow={this.popupWindowShowHandler}
+									onHide={this.popupWindowHideHandler}
+									onClose={this.popupCloseHandler}
+									router={this.context.router}>
+										{_props.popup}
+								</RoutePopupWindow>
+					}/>
+					<Route
+						path="/records/:record_id"
+						render={(_props) =>
+							<RoutePopupWindow
+								onShow={this.popupWindowShowHandler}
+								onHide={this.popupWindowHideHandler}
+								onClose={this.popupCloseHandler}
+								router={this.context.router}>
+									<RecordView {..._props} />
+								</RoutePopupWindow>
+					}/>
+					<Route 
+							path="/records"
+							render={() =>
+								<RoutePopupWindow
+									onShow={this.popupWindowShowHandler}
+									onHide={this.popupWindowHideHandler}
+									onClose={this.popupCloseHandler}
+									router={this.context.router}>
+										{_props.popup}
+								</RoutePopupWindow>
+					}/>
+				</Switch>
 
-				<MapView searchParams={this.state.params} onMarkerClick={this.mapMarkerClick}>
+				<MapView
+					searchParams={this.props.match.params}
+					onMarkerClick={this.mapMarkerClick}
+				>
+					<MapMenu
+						searchMetadata={this.state.searchMetadata}
+						{..._props}
+					/>
 
-					<MapMenu searchMetadata={this.state.searchMetadata} />
-
-					<LocalLibraryView headerText={l('Mina sägner')} />
+					<LocalLibraryView headerText={l('Mina sägner')} {..._props} />
 
 					<GlobalAudioPlayer />
 
 				</MapView>
 
-				<RoutePopupWindow onShow={this.popupWindowShowHandler} onHide={this.popupWindowHideHandler} router={this.context.router} onClose={this.popupCloseHandler}>
-					{popup}
-				</RoutePopupWindow>
-
 				<div className="map-progress"><div className="indicator"></div></div>
 
 				<ImageOverlay />
 				<FeedbackOverlay />
+				<ContributeInfoOverlay />
 				<TranscriptionOverlay />
 				<PopupNotificationMessage />
-				{
-					/*
-					<OverlayWindow title="Velkommen till sägenkartan">
-						<SitevisionContent url={config.startPageUrl} disableScriptExecution={true} />
-						<div>
-							<hr className="margin-bottom-35"/>
-							<button className="button-primary margin-bottom-0" onClick={this.introOverlayCloseButtonClickHandler}>Stäng</button>
-							<label className="margin-top-10 margin-bottom-0 font-weight-normal u-pull-right"><input className="margin-bottom-0" onChange={function(event) {this.setState({neverShowIntro: event.currentTarget.checked})}.bind(this)} type="checkbox" /> Klicka här för att inte visa den rutan igen.</label>
-						</div>
-					</OverlayWindow>
-					*/
-				}
 
 			</div>
 		);
