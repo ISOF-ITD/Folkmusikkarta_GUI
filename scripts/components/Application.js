@@ -58,6 +58,7 @@ export default class Application extends React.Component {
 			searchValue: '',
 			searchField: '',
 			searchMetadata: false,
+			match: '',
 
 			popupVisible: false
 		};
@@ -158,6 +159,7 @@ export default class Application extends React.Component {
 			searchPersonRelation: this.props.match.params.person_relation,
 			searchGender: this.props.match.params.gender,
 			searchMetadata: this.props.match.params.has_metadata,
+			match: this.props.match,
 		}, function() {
 			setTimeout(function() {
 				// Väntar en sekund, lägger till app-initialized till body class,
@@ -192,6 +194,7 @@ export default class Application extends React.Component {
 			searchPersonRelation: props.match.params.person_relation,
 			searchGender: props.match.params.gender,
 			searchMetadata: props.match.params.has_metadata,
+			match: props.match,
 		});
 	}
 
@@ -202,23 +205,22 @@ export default class Application extends React.Component {
 
 	render() {
 		// Innehåll av RoutePopupWindow, kommer från application route i app.js
-		const _props = this.props;
-		const match = this.props.match;
+		let props = this.props;
+		let match = this.state.match;
 
 		return (
 			<div className={'app-container'+(this.state.popupVisible ? ' has-overlay' : '')}>
 				<Switch>
 					<Route
-						path="/places/:place_id([0-9]+)"
-						render={(_props) =>
+						path="/places/:place_id([0-9]+)">
 							<RoutePopupWindow
 								onShow={this.popupWindowShowHandler}
 								onHide={this.popupWindowHideHandler}
 								onClose={this.popupCloseHandler}
 								router={this.context.router}>
-									<PlaceView {..._props} match={match}/>
-								</RoutePopupWindow>
-					}/>
+									<PlaceView match={match}/>
+							</RoutePopupWindow>
+					</Route>
 					<Route 
 							path="/places"
 							render={() =>
@@ -227,18 +229,7 @@ export default class Application extends React.Component {
 									onHide={this.popupWindowHideHandler}
 									onClose={this.popupCloseHandler}
 									router={this.context.router}>
-										{_props.popup}
-								</RoutePopupWindow>
-					}/>
-					<Route
-						path="/records/:record_id"
-						render={(_props) =>
-							<RoutePopupWindow
-								onShow={this.popupWindowShowHandler}
-								onHide={this.popupWindowHideHandler}
-								onClose={this.popupCloseHandler}
-								router={this.context.router}>
-									<RecordView {..._props} />
+										{props.popup}
 								</RoutePopupWindow>
 					}/>
 					<Route 
@@ -249,7 +240,7 @@ export default class Application extends React.Component {
 									onHide={this.popupWindowHideHandler}
 									onClose={this.popupCloseHandler}
 									router={this.context.router}>
-										{_props.popup}
+										<RecordView {...props} />
 								</RoutePopupWindow>
 					}/>
 				</Switch>
@@ -260,10 +251,10 @@ export default class Application extends React.Component {
 				>
 					<MapMenu
 						searchMetadata={this.state.searchMetadata}
-						{..._props}
+						{...props}
 					/>
 
-					<LocalLibraryView headerText={l('Mina sägner')} {..._props} />
+					<LocalLibraryView headerText={l('Mina sägner')} history={props.history} />
 
 					<GlobalAudioPlayer />
 
