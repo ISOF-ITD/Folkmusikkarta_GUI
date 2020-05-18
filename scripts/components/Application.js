@@ -169,7 +169,7 @@ export default class Application extends React.Component {
 		}.bind(this));
 	}
 
-	componentWillReceiveProps(props) {
+	UNSAFE_componentWillReceiveProps(props) {
 		// När application tar emot parametrar från url:et, skicka dem via eventBus
 		// MapView, RecordsList och sökfält tar emot dem och hämtar data
 		if (window.eventBus) {
@@ -206,7 +206,7 @@ export default class Application extends React.Component {
 	render() {
 		// Innehåll av RoutePopupWindow, kommer från application route i app.js
 		let props = this.props;
-		let match = this.state.match;
+		let match = this.props.match;
 
 		return (
 			<div className={'app-container'+(this.state.popupVisible ? ' has-overlay' : '')}>
