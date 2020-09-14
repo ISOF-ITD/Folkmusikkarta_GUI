@@ -11,6 +11,7 @@ export default class MapMenu extends React.Component {
 		this.searchBoxSizeChangeHandler = this.searchBoxSizeChangeHandler.bind(this);
 		this.searchHandler = this.searchHandler.bind(this);
 		this.pointTypeOptionClickHandler = this.pointTypeOptionClickHandler.bind(this);
+		this.pointTypeOptionKeyUpHandler = this.pointTypeOptionKeyUpHandler.bind(this);
 
 		this.state = {
 			selectedCategory: null,
@@ -46,6 +47,12 @@ export default class MapMenu extends React.Component {
 		});
 	}
 
+	pointTypeOptionKeyUpHandler(event) {
+		if(event.keyCode == 13){
+			this.pointTypeOptionClickHandler(event);
+		}
+	}
+
 	pointTypeOptionClickHandler(event) {
 		this.setState({
 			pointTypeOption: event.currentTarget.dataset.option
@@ -73,15 +80,15 @@ export default class MapMenu extends React.Component {
 
 				<div className={'point-type-options map-floating-control option-'+this.state.pointTypeOption}>
 
-					<a className="option-item" data-option="1" onClick={this.pointTypeOptionClickHandler}>
+					<div tabIndex={0} className="option-item" data-option="1" onClick={this.pointTypeOptionClickHandler} onKeyUp={this.pointTypeOptionKeyUpHandler}>
 						<span className="icon icon-marker-normal"></span>
 						<span className="label">Alla punkter</span>
-					</a>
+					</div>
 
-					<a className="option-item" data-option="2" onClick={this.pointTypeOptionClickHandler}>
+					<div tabIndex={0} className="option-item" data-option="2" onClick={this.pointTypeOptionClickHandler} onKeyUp={this.pointTypeOptionKeyUpHandler}>
 						<span className="icon icon-marker-curated"></span>
 						<span className="label">Ljudfiler</span>
-					</a>
+					</div>
 
 					<span className="selected-line"></span>
 

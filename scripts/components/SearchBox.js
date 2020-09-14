@@ -16,6 +16,7 @@ export default class SearchBox extends React.Component {
 		this.searchButtonClickHandler = this.searchButtonClickHandler.bind(this);
 		this.executeSimpleSearch = this.executeSimpleSearch.bind(this);
 		this.searchBoxClickHandler = this.searchBoxClickHandler.bind(this);
+		this.searchBoxKeyUpHandler = this.searchBoxKeyUpHandler.bind(this);
 		this.toggleAdvanced = this.toggleAdvanced.bind(this);
 		this.languageChangedHandler = this.languageChangedHandler.bind(this);
 
@@ -114,6 +115,10 @@ export default class SearchBox extends React.Component {
 		});
 	}
 
+	searchBoxKeyUpHandler() {
+		this.searchBoxClickHandler();
+	}
+
 	searchBoxClickHandler() {
 		if (!this.state.expanded) {
 			this.setState({
@@ -188,9 +193,10 @@ export default class SearchBox extends React.Component {
 	render() {
 		return (
 			<div ref="container" 
-				onClick={this.searchBoxClickHandler} 
+				onClick={this.searchBoxClickHandler}
+				onKeyUp={this.searchBoxKeyUpHandler} 
 				className={'search-box map-floating-control'+(this.state.expanded ? ' expanded' : '')+(this.state.advanced ? ' advanced' : '')} >
-				<input ref="searchInput" type="text" 
+				<input tabIndex='0' ref="searchInput" type="text" 
 					value={this.state.searchValue} 
 					onChange={this.searchValueChangeHandler} 
 					onKeyPress={this.inputKeyPressHandler} />

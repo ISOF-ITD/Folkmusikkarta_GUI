@@ -210,6 +210,22 @@ export default class Application extends React.Component {
 
 		return (
 			<div className={'app-container'+(this.state.popupVisible ? ' has-overlay' : '')}>
+
+				<MapView
+					searchParams={this.props.match.params}
+					onMarkerClick={this.mapMarkerClick}
+				>
+					<MapMenu
+						searchMetadata={this.state.searchMetadata}
+						{...props}
+					/>
+
+					<LocalLibraryView headerText={l('Mina sägner')} history={props.history} />
+
+					<GlobalAudioPlayer />
+
+				</MapView>
+
 				<Switch>
 					<Route
 						path="/places/:place_id([0-9]+)">
@@ -244,21 +260,6 @@ export default class Application extends React.Component {
 								</RoutePopupWindow>
 					}/>
 				</Switch>
-
-				<MapView
-					searchParams={this.props.match.params}
-					onMarkerClick={this.mapMarkerClick}
-				>
-					<MapMenu
-						searchMetadata={this.state.searchMetadata}
-						{...props}
-					/>
-
-					<LocalLibraryView headerText={l('Mina sägner')} history={props.history} />
-
-					<GlobalAudioPlayer />
-
-				</MapView>
 
 				<div className="map-progress"><div className="indicator"></div></div>
 

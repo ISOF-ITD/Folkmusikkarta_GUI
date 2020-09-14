@@ -8,6 +8,7 @@ export default class SearchMenu extends React.Component {
 		this.menuButtonClick = this.menuButtonClick.bind(this);
 		this.toggleMinimize = this.toggleMinimize.bind(this);
 		this.termClickHandler = this.termClickHandler.bind(this);
+		this.termKeyUpHandler = this.termKeyUpHandler.bind(this);
 
 		this.state = {
 			menuOpen: false,
@@ -52,6 +53,12 @@ export default class SearchMenu extends React.Component {
 		});
 	}
 
+	termKeyUpHandler(event){
+		if(event.keyCode == 13){
+			this.termClickHandler(event);
+		}
+	}
+
 	termClickHandler(event) {
 		if (this.props.onSearch) {
 			this.props.onSearch(event.currentTarget.dataset.term);
@@ -69,14 +76,14 @@ export default class SearchMenu extends React.Component {
 
 				<div className={'list-container minimal-scrollbar'}>
 
-					<a className="item" href="#/places">Visa alla</a>
+					<a className="item" href="#/places" tabIndex={0}>Visa alla</a>
 
 					<div className="list-subheading">Låttyp eller visgenre</div>
 
 					<div className="grid-list">
 						{
 							_.map(this.searchTerms.genre, function(term) {
-								return <a onClick={this.termClickHandler} data-term={term} className="item" key={term}>{term}</a>;
+								return <div tabIndex={0} onClick={this.termClickHandler} onKeyUp={this.termKeyUpHandler} data-term={term} className="item" key={term}>{term}</div>;
 							}.bind(this))
 						}
 						<div className="u-cf" />
@@ -86,7 +93,7 @@ export default class SearchMenu extends React.Component {
 					<div className="grid-list">
 						{
 							_.map(this.searchTerms.instruments, function(term) {
-								return <a onClick={this.termClickHandler} data-term={term} className="item" key={term}>{term}</a>;
+								return <div tabIndex={0} onClick={this.termClickHandler} onKeyUp={this.termKeyUpHandler} data-term={term} className="item" key={term}>{term}</div>;
 							}.bind(this))
 						}
 						<div className="u-cf" />
