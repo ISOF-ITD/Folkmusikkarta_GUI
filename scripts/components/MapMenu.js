@@ -1,8 +1,7 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
 
 import SearchMenu from './SearchMenu';
-import SearchBox from './SearchBox';
+import SearchBox from './../../ISOF-React-modules/components/views/SearchBox';
 
 export default class MapMenu extends React.Component {
 	constructor(props) {
