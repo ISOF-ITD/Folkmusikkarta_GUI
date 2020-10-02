@@ -42,8 +42,6 @@ export default {
 			folkmusik_proveniens: 'Proveniens',
 			folkmusik_comment: 'Övrigt'
 		},
-		feedbackEmail: 'bengt.edqvist@isof.se',
-		// feedbackEmail: 'per.laas@isof.se',
 		feedbackText: 'Har du hittat några fel i Folkmusikdatabasen? Har du kompletterande information om musik eller text? Eller vill du hjälpa till på annat sätt? Kontakta oss gärna!',
 	},
 
