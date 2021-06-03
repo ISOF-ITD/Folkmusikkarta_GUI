@@ -68,7 +68,8 @@ export default {
 	audioUrl: 'https://filemaker.isof.se/',
 
 	appUrl: 'https://frigg.isof.se/static/js-apps/folkmusikkartan/',
-	siteUrl: 'https://www.isof.se/folkminnen/projekt/hitta-folkmusiken/databasen-hitta-folkmusiken.html',
+	// For share links to users and MAYBE some image links (is last slash needed?):
+	siteUrl: 'https://www.isof.se/hittafolkmusiken/',
 
 	// Url till Django/Elasticsearch API
 	apiUrl: 'https://frigg.isof.se/sagendatabas/api/es/',
